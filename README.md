@@ -9,7 +9,7 @@ How to make it work:
 2. Deploy it on your server. It is a simple maven project, just create a fatjar.
 3. Find it by your key in the contacts window of your Drawer app. Start chatting.
 ```
-![Shell](https://github.com/DrawersApp/Command-Line-Monitoring/blob/master/pom.xml)
+![Shell](https://github.com/DrawersApp/Command-Line-Monitoring/blob/master/shell.gif)
 
 ```
 It currently only replies messages with size < 4kb, chunking is in plan.
