@@ -5,6 +5,8 @@ import rocks.xmpp.core.XmppException;
 import rocks.xmpp.core.sasl.AuthenticationException;
 import rocks.xmpp.core.session.TcpConnectionConfiguration;
 import rocks.xmpp.core.session.XmppClient;
+import rocks.xmpp.core.session.XmppSessionConfiguration;
+import rocks.xmpp.core.session.debug.ConsoleDebugger;
 import rocks.xmpp.core.stanza.model.Message;
 import rocks.xmpp.core.stream.model.StreamElement;
 import rocks.xmpp.extensions.httpbind.BoshConnectionConfiguration;
@@ -50,13 +52,16 @@ public class Bot {
                 .wait(60)  // BOSH connection manager should wait maximal 60 seconds before responding to a request.
                 .build();
 
+        // Need it for checking the packets and debugging - http://sco0ter.bitbucket.org/babbler/debugging.html.
+        XmppSessionConfiguration xmppSessionConfiguration = XmppSessionConfiguration.builder().
+                debugger(ConsoleDebugger.class).build();
 
-        XmppClient xmppClient = new XmppClient("ejabberd.sandwitch.in", tcpConfiguration, boshConfiguration);
+        XmppClient xmppClient = new XmppClient("ejabberd.sandwitch.in", xmppSessionConfiguration, tcpConfiguration, boshConfiguration);
 
         // Listen for messages
         xmppClient.addInboundMessageListener(e -> {
             Message message = e.getMessage();
-            // Handle inbound message.
+            // Handle inbound message.TODO - Check for message types.
             Observable.just(message)
                     .subscribeOn(Schedulers.computation())
                     .map(message1 -> message1.getBody())
@@ -80,7 +85,7 @@ public class Bot {
          */
 
         try {
-            xmppClient.login("fe9a971b-c130-44d4-84ab-090b90a56011", "qa", "babbler");
+            xmppClient.login("user", "pwd", "babbler");
         } catch (AuthenticationException e) {
             // Login failed, because the server returned a SASL failure, most likely due to wrong credentials.
         } catch (XmppException e) {
