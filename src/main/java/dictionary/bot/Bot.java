@@ -66,7 +66,7 @@ public class Bot {
                     .subscribeOn(Schedulers.computation())
                     .map(message1 -> message1.getBody())
                     .filter(body -> body != null && body.length() > 0)
-                    .map(command  -> ShellCommands.getShellCommands().executeCommand(command))
+                    .map(command -> ShellCommands.getShellCommands().executeCommand(command))
                     .filter(output -> output != null && output.length()>0)
                     .subscribe(filteredOutput -> xmppClient.send(generateMessage(message.getFrom(),
                             Message.Type.CHAT, filteredOutput)));
@@ -85,7 +85,7 @@ public class Bot {
          */
 
         try {
-            xmppClient.login("user", "pwd", "babbler");
+            xmppClient.login("user", "password", "babbler");
         } catch (AuthenticationException e) {
             // Login failed, because the server returned a SASL failure, most likely due to wrong credentials.
         } catch (XmppException e) {

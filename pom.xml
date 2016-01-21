@@ -32,7 +32,7 @@
     </dependencies>
 
     <build>
-        <finalName>dictionarybot</finalName>
+        <finalName>shellbot</finalName>
         <plugins>
 
             <!-- download source code in Eclipse, best practice -->
