@@ -10,9 +10,10 @@ How to make it work:
 3. Find it by your key in the contacts window of your Drawer app. Start chatting.
 ```
 
-
+```
 It currently only replies messages with size < 4kb, chunking is in plan.
 Doesn't work on commands with sudo, supporting it is in plan.
 It is using Babbler XMPP client to connect to Drawers. System requirement involves Java-8.
 We love and use RX-Java to dispatch the messages - http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/
+```
 
